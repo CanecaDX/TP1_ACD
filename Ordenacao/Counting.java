@@ -1,0 +1,84 @@
+package Ordenacao;
+
+public class Counting implements Ordenador {
+    @Override
+    public void ordenar(int[] vetor) {
+        if (vetor == null || vetor.length < 2) {
+            return;
+        }
+
+        int menor = vetor[0];
+        int maior = vetor[0];
+
+        for (int i = 1; i < vetor.length; i++) {
+            if (vetor[i] < menor) {
+                menor = vetor[i];
+            }
+
+            if (vetor[i] > maior) {
+                maior = vetor[i];
+            }
+        }
+
+        long intervalo = (long) maior - menor + 1;
+
+        if (intervalo > Integer.MAX_VALUE - 8) {
+            throw new IllegalArgumentException(
+                "Intervalo de valores muito grande para o Counting Sort."
+            );
+        }
+
+        int[] contagem = new int[(int) intervalo];
+
+        for (int i = 0; i < vetor.length; i++) {
+            contagem[vetor[i] - menor]++;
+        }
+
+        int posicao = 0;
+
+        for (int i = 0; i < contagem.length; i++) {
+            while (contagem[i] > 0) {
+                vetor[posicao] = i + menor;
+                posicao++;
+                contagem[i]--;
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] vetor1 = {10, 20, 50, 60, 70, 80, 95, 110, 130, 150, 200, 220};
+        int[] vetor2 = {220, 200, 150, 130, 110, 95, 85, 70, 60, 50, 20, 10};
+        int[] vetor3 = {4, 7, 2, 9, 1, 5, 3, 8, 6, 40, 12, 19, 200, 311, 233};
+        int[] vetor4 = {10, 10, 10, 10, 11, 11, 11, 110, 130, 150, 150, 10};
+
+        if (args.length != 1) {
+            System.out.println("Uso: java TP1.src.Counting <tipo>");
+            System.out.println("Tipos disponíveis: 1, 2, 3 ou 4");
+            return;
+        }
+
+        int[] vetor;
+
+        switch (args[0]) {
+            case "1":
+                vetor = vetor1;
+                break;
+            case "2":
+                vetor = vetor2;
+                break;
+            case "3":
+                vetor = vetor3;
+                break;
+            case "4":
+                vetor = vetor4;
+                break;
+            default:
+                System.out.println("Tipo inválido. Escolha entre 1, 2, 3 ou 4.");
+                return;
+        }
+
+        System.out.println("Antes: " + java.util.Arrays.toString(vetor));
+        new Counting().ordenar(vetor);
+        System.out.println("Depois: " + java.util.Arrays.toString(vetor));
+    }
+}
