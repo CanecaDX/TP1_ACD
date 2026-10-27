@@ -9,13 +9,12 @@ public class Vetores {
     public static Map<String, int[]> geraVetores(int n) {
         int[] original = GeradorVetores.gerarAleatorio(n);
 
+        int[] vetorAleatorio = original.clone();
+
         int[] vetorOrdenado = original.clone();
         Arrays.sort(vetorOrdenado);
 
-        int[] vetorAleatorio = original.clone();
-
-        int[] vetorDecrescente = original.clone();
-        Arrays.sort(vetorDecrescente);
+        int[] vetorDecrescente = vetorOrdenado.clone();
         for (int i = 0; i < vetorDecrescente.length / 2; i++) {
             int aux = vetorDecrescente[i];
             vetorDecrescente[i] = vetorDecrescente[vetorDecrescente.length - 1 - i];
@@ -23,8 +22,8 @@ public class Vetores {
         }
 
         Map<String, int[]> vetores = new LinkedHashMap<>();
-        vetores.put("ordenado", vetorOrdenado);
         vetores.put("aleatorio", vetorAleatorio);
+        vetores.put("ordenado", vetorOrdenado);
         vetores.put("decrescente", vetorDecrescente);
 
         return vetores;

@@ -3,8 +3,21 @@ package Ordenacao;
 public class Counting implements Ordenador {
     @Override
     public void ordenar(int[] vetor) {
-        if (vetor == null || vetor.length < 2) {
+        if (vetor == null) {
+            System.out.println("Counting Sort: vetor nulo.");
             return;
+        }
+
+        if (vetor.length < 2) {
+            System.out.println("Counting Sort: vetor com menos de 2 elementos.");
+            return;
+        }
+
+        for (int valor : vetor) {
+            if (valor < 0) {
+                System.out.println("Counting Sort: exige valores inteiros não negativos.");
+                return;
+            }
         }
 
         int menor = vetor[0];
@@ -23,9 +36,8 @@ public class Counting implements Ordenador {
         long intervalo = (long) maior - menor + 1;
 
         if (intervalo > Integer.MAX_VALUE - 8) {
-            throw new IllegalArgumentException(
-                "Intervalo de valores muito grande para o Counting Sort."
-            );
+            System.out.println("Counting Sort: intervalo de valores muito grande.");
+            return;
         }
 
         int[] contagem = new int[(int) intervalo];

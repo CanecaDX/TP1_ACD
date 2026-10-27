@@ -5,8 +5,21 @@ import java.util.ArrayList;
 public class Bucket implements Ordenador {
     @Override
     public void ordenar(int[] vetor) {
-        if (vetor == null || vetor.length < 2) {
+        if (vetor == null) {
+            System.out.println("Bucket Sort: vetor nulo.");
             return;
+        }
+
+        if (vetor.length < 2) {
+            System.out.println("Bucket Sort: vetor com menos de 2 elementos.");
+            return;
+        }
+
+        for (int valor : vetor) {
+            if (valor < 0) {
+                System.out.println("Bucket Sort: exige valores inteiros não negativos.");
+                return;
+            }
         }
 
         int menor = vetor[0];

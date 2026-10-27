@@ -3,8 +3,21 @@ package Ordenacao;
 public class Radix implements Ordenador {
     @Override
     public void ordenar(int[] vetor) {
-        if (vetor == null || vetor.length < 2) {
+        if (vetor == null) {
+            System.out.println("Radix Sort: vetor nulo.");
             return;
+        }
+
+        if (vetor.length < 2) {
+            System.out.println("Radix Sort: vetor com menos de 2 elementos.");
+            return;
+        }
+
+        for (int valor : vetor) {
+            if (valor < 0) {
+                System.out.println("Radix Sort: exige valores inteiros não negativos.");
+                return;
+            }
         }
 
         long[] valores = new long[vetor.length];

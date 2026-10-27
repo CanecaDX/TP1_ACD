@@ -37,9 +37,10 @@ public class Testes {
         };
 
         for (int n : TAMANHOS) {
+            Map<String, int[]> vetores = Vetores.geraVetores(n);
+
             for (String configuracao : CONFIGURACOES) {
-                Map<String, int[]> vetores = Vetores.geraVetores(n);
-                int[] vetor = vetores.get(configuracao);
+                int[] vetorBase = vetores.get(configuracao);
 
                 for (Ordenador algoritmo : algoritmos) {
                     String nomeAlgoritmo = algoritmo.getClass().getSimpleName();
@@ -54,7 +55,7 @@ public class Testes {
                         for (int execucao = 0; execucao < 10; execucao++) {
                             System.out.println("[TESTE] Algoritmo: " + nomeAlgoritmo + " | tamanho: " + n + " | configuracao: " + configuracao + " | execucao: " + (execucao + 1) + "/10");
 
-                            int[] copia = vetor.clone();
+                            int[] copia = vetorBase.clone();
                             long inicio = System.nanoTime();
                             algoritmo.ordenar(copia);
                             long fim = System.nanoTime();
