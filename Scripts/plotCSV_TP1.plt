@@ -20,6 +20,7 @@ set xlabel "Tamanho do vetor (elementos)"
 set ylabel "Tempo medio de execucao (segundos)"
 set logscale x 10
 set logscale y 10
+set xrange [1000:*]
 set format x "10^{%L}"
 set format y "10^{%L}"
 set pointsize 1.2
@@ -39,17 +40,17 @@ set style line 10 lw 2 lc rgb "#008080" pt 8
 # Gera um grafico para cada tipo de entrada.
 do for [i=1:3] {
     if (i == 1) {
-        arquivo = "dados_ordenado.csv"
+        arquivo = "../Resultados/Analise/dados_ordenado.csv"
         titulo = "Entradas em ordem crescente"
-        saida = "grafico_ordenado.png"
+        saida = "../Resultados/Analise/grafico_ordenado.png"
     } else if (i == 2) {
-        arquivo = "dados_aleatorio.csv"
+        arquivo = "../Resultados/Analise/dados_aleatorio.csv"
         titulo = "Entradas em ordem aleatoria"
-        saida = "grafico_aleatorio.png"
+        saida = "../Resultados/Analise/grafico_aleatorio.png"
     } else {
-        arquivo = "dados_decrescente.csv"
+        arquivo = "../Resultados/Analise/dados_decrescente.csv"
         titulo = "Entradas em ordem decrescente"
-        saida = "grafico_decrescente.png"
+        saida = "../Resultados/Analise/grafico_decrescente.png"
     }
 
     set output saida
